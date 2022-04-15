@@ -12,17 +12,17 @@
 
 **Chapter 06. 클래스** (p185)
 
-- [6.1 객체지향 프로그래밍](#1. 객체 지향 프로그래밍)
-  - [객체 (Object)](#객체 (Object))
-  - [객체 간의 관계](#객체 간의 관계)
-  - [객체 지향 프로그래밍의 특징](#객체 지향 프로그래밍의 특징)
-- [6.14 Getter와 Setter 메소드](#Getter와 Setter 메소드)
+- [6.1 객체지향 프로그래밍](#1.객체지향프로그래밍)
+  - [객체 (Object)](#객체(Object))
+  - [객체 간의 관계](#객체간의관계)
+  - [객체 지향 프로그래밍의 특징](#객체지향프로그래밍의특징)
+- [6.14 Getter와 Setter 메소드](#Getter와Setter메소드)
 - [코드](#코드)
-  - [ch06](Package: ch06)
-    - [Car.java](#1. Car.java)
+  - [ch06](Package:ch06)
+    - [Car.java](#1.Car.java)
     - App.java
     - App2.java
-    - [Account.java](#2. Account.java)
+    - [Account.java](#2.Account.java)
     - BankApp.java
 
 
