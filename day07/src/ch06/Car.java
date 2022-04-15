@@ -2,7 +2,6 @@
  * 
  */
 package ch06;
-
 /**
  * 자동차 객체를 생성하기 위한 틀
  * @author noranbear (norandoly@gmail.com)
@@ -16,8 +15,13 @@ public class Car {
 	int fsize;		// 기름통 사이즈
 	int cfsize;		// 현재 기름량
 	
-	// Constructor (생성자) - 반드시 Class의 이름과 동일.
+	// Constructor (생성자) - 반드시 Class의 이름과 동일해야 함.
+	
+	/* 
+	 * 아무것도 지정 안 해놨음으로 무형의 자동차를 만듬
+	 */
 	public Car() {
+		
 	}
 	
 	public Car(String name, String color, int size, int fsize, int cfsize) {
@@ -43,11 +47,13 @@ public class Car {
 		cfsize += f;
 	}
 	
-	// 자동차의 정보 print
+	/*
+	 * 자동차의 정보 print
+	 */
 	@Override
 	public String toString() {
 		return "Car [name=" + name + ", color=" + color + ", size=" + size + ", fsize=" + fsize + ", cfsize=" + cfsize
-				+ "]"; // this.name, this.color and so on. 
+				+ "]"; 		// this.name, this.color and so on. 
 	}
 	
 }

@@ -4,7 +4,7 @@
 package ch06;
 
 /**
- *
+ * Bank Account 객체의 틀
  * @author noranbear (norandoly@gmail.com)
  * @since 2022. 4. 15. 오전 11:41:35
  */
