@@ -1,4 +1,4 @@
-# Day 07
+# Day07
 
 - 2022-04-15에 멀티캠퍼스 'AI 플랫폼을 이용한 WEB 서비스 만들기'라는 프로그램에서
 
@@ -12,11 +12,11 @@
 
 **Chapter 06. 클래스** (p185)
 
-- [6.1 객체지향 프로그래밍](#1.객체지향프로그래밍)
-  - [객체 (Object)](#객체(Object))
-  - [객체 간의 관계](#객체간의관계)
-  - [객체 지향 프로그래밍의 특징](#객체지향프로그래밍의특징)
-- [6.14 Getter와 Setter 메소드](#Getter)
+- [6.1 객체지향 프로그래밍](#객체지향프로그래밍)
+  - [객체 (Object)](#2.객체(Object))
+  - [객체 간의 관계](#3.관계)
+  - [객체 지향 프로그래밍의 특징](#4.특징)
+- [6.14 Getter와 Setter 메소드](#Getter&Setter)
 - [코드](#코드)
   - [ch06](Package:ch06)
     - [Car.java](#1.Car.java)
@@ -28,9 +28,9 @@
 
 
 
-## 객체 지향 프로그래밍
+## 객체지향프로그래밍
 
-#### 1. 객체 지향 프로그래밍 (OOP: Object-Oriented Programming)
+#### 1.객체 지향 프로그래밍 (OOP: Object-Oriented Programming)
 
 - 부품에 해당하는 객체들을 먼저 만들고, 이것들을 하나씩 조립해서 완성된 프로그램을 만드는 기법.
 
@@ -64,7 +64,7 @@
   
      
 
-#### 2. 객체 (Object)
+#### 2.객체(Object)
 
 - 물리적으로 존재하거나 추상적으로 생각할 수 있는 것 중에서 자신의 속성을 가지고 있고 다른 것과 식별 가능한 것.
 
@@ -101,14 +101,14 @@
 
 ​	
 
-#### 3. 객체 간의 관계
+#### 3.관계
   - 집합 관계
   - 사용 관계
   - 상속 관계
 
 
 
-#### 4. 객체 지향 프로그래밍의 특징
+#### 4.특징
   - Encapsulation (캡슐화)
     - 정보를 캡슐 속에 감춰서 외부에서 함부로 접근해 바꾸지 못 하게 한다.
     - private이 쓰임.
@@ -119,7 +119,7 @@
 
 
 
-## Getter와 Setter 메소드
+## Getter&Setter
 
 - Getter와 Setter
   -  encapsulation된 정보에 접근하기 위해서 쓰인다.
@@ -128,9 +128,9 @@
 
 ## 코드
 
-### Package: ch06
+### Package:ch06
 
-#### 1. Car.java
+#### 1.Car.java
 
 <img src="README.assets/Car UML.png" alt="Car.java UML" style="zoom: 130%;" align = "left" />
 
@@ -205,7 +205,7 @@
 
 ---
 
-#### 2. Account.java
+#### 2.Account.java
 
 
 
@@ -214,3 +214,10 @@
 - ***Account.java***: Bank account 객체 구현 틀
 - ***BankApp.java***: *Account.java*의 application 
 
+
+
+
+
+
+
+[Top](#Day07)
