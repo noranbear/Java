@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package p344;
 
 /**
@@ -14,7 +12,7 @@ public class CustomerVO {
 	private String pwd;
 	private String name;
 	
-	
+	// Constructors
 	public CustomerVO() {
 	}
 
@@ -24,7 +22,7 @@ public class CustomerVO {
 		this.name = name;
 	}
 
-	
+	// Getters and Setters
 	/**
 	 * @return the id
 	 */
@@ -67,7 +65,7 @@ public class CustomerVO {
 		this.name = name;
 	}
 
-	
+	// toString()
 	@Override
 	public String toString() {
 		return "CustomerVO [id=" + id + ", pwd=" + pwd + ", name=" + name + "]";
