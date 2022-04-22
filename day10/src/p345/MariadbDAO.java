@@ -6,7 +6,8 @@ package p345;
 import java.util.ArrayList;
 
 /**
- *
+ * 데이터베이스 MariadbDAO과 연동하는 클래스
+ * 내용은 OracleDAO와 같다.
  * @author noranbear (norandoly@gmail.com)
  * @since 2022. 4. 20. 오후 2:42:02
  */
