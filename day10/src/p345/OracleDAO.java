@@ -5,9 +5,9 @@ package p345;
 
 import java.util.ArrayList;
 
-
 /**
- *
+ * 데이터베이스 Oracle과 연동하는 클래스
+ * DB에 정보를 넣는 방법을 배우지 않았기 때문에 그러한 행위들은 모두 화면에 쓰는 정도로 제한된다.
  * @author noranbear (norandoly@gmail.com)
  * @since 2022. 4. 20. 오후 2:30:06
  */
