@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
+ * DAO 인터페이스에 맞게 설계된 app.
+ * OracleDAO와 MariadbDAO 사이의 치환이 자유롭다.
  * @author noranbear (norandoly@gmail.com)
  * @since 2022. 4. 20. 오전 11:22:14
  */
@@ -15,9 +16,9 @@ public class App {
 
 	public static void main(String[] args) {
 		System.out.println("Start...");
-		DAO dao = new OracleDAO();	// interface -> DAO class 연결/ Spring에서는 이거 없이도
-									// 퍼즐처럼 뺏다꼈다
-//		DAO dao = new MariadbDAO();	// Mariadb에 연동
+		DAO dao = new OracleDAO();	// interface에 DAO class 연결
+//		DAO dao = new MariadbDAO();	// interface에 Mariadb 연동
+		
 		Scanner sc = new Scanner(System.in);
 		
 		while(true) {
