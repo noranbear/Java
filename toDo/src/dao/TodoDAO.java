@@ -10,11 +10,11 @@ import frame.DAO;
 import frame.Search;
 import vo.TodoVO;
 
-
 /**
  * To do DAO
  * @author noranbear (norandoly@gmail.com)
  * @since 2022. 4. 22. 오후 4:41:38
+ * @version 3.0
  */
 public class TodoDAO implements DAO<String, TodoVO>, Search<TodoVO, Boolean> {
 
@@ -86,38 +86,45 @@ public class TodoDAO implements DAO<String, TodoVO>, Search<TodoVO, Boolean> {
 	}
 
 	/**
-	 * to do list에 한 목록을 골라서 체크한다.
+	 * 선택된 목록을 '달성'으로 체크한다.
 	 */
 	@Override
 	public void update(String k) throws Exception {
 		TodoVO t = null;
-		if(map.containsKey(k) == false) {
-			throw new Exception("Can't find the value.");
+		// 해당 목록이 없는 경우
+		if(!(map.containsKey(k))) {
+			throw new Exception("Can't find the list.");
 		}
 		t = map.get(k);
-		// if it's already true?
-		if(t.isDone() == true) {
-			throw new Exception("It's already done.");
+		// 이미 '달성'으로 되어있는 경우
+		if(t.isDone()) {
+			throw new Exception("It's already checked as completed.");
 		}
 		t.setDone(true);
 		
 	}
-
+	/**
+	 * 선택된 목록을 보여준다.
+	 */
 	@Override
 	public TodoVO select(String k) throws Exception {
 		TodoVO t = null;
-		if(map.containsKey(k) == false) {
-			throw new Exception("Can't find the value.");
+		// 해당 리스트가 없는 경우
+		if(!(map.containsKey(k))) {
+			throw new Exception("Can't find the list.");
 		}
 		t = map.get(k);
 		return t;
 	}
 
+	/**
+	 * 저장되어 있는 모든 목록을 보여준다.
+	 */
 	@Override
 	public ArrayList<TodoVO> select() throws Exception {
 		// 등록되어 있는 리스트가 없는 경우
 		if(map.isEmpty()) {
-			throw new Exception("There's nothing to do.");
+			throw new Exception("There's no lists.");
 		}
 		Collection<TodoVO> col = map.values();
 		Iterator<TodoVO> it = col.iterator();
@@ -162,7 +169,6 @@ public class TodoDAO implements DAO<String, TodoVO>, Search<TodoVO, Boolean> {
 			}else {
 				throw new Exception("There's uncompleted lists.\n");
 			}
-			
 		}
 		return list;
 	}
