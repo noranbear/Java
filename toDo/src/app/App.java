@@ -13,6 +13,7 @@ import vo.TodoVO;
  * To do list application
  * @author noranbear (norandoly@gmail.com)
  * @since 2022. 4. 20. 오전 11:22:14
+ * @version 3.0
  */
 public class App {
 
@@ -42,7 +43,7 @@ public class App {
 				
 				System.out.println("Write a list number: ");
 				String num = sc.next();
-				// 리스트 넘버를 숫자로 안 쓴 경우
+				// ???리스트 넘버를 숫자로 안 쓴 경우 (계속 반복된다)
 				try {
 					Integer.parseInt(num);
 				}catch(Exception e) {
@@ -78,7 +79,7 @@ public class App {
 					continue;
 				}
 				
-				// 2. 해당 리스트를 지운다.
+				// 2. 리스트 지우기
 				try {
 					dao.delete(num);
 				} catch (Exception e) {
@@ -86,7 +87,7 @@ public class App {
 				}
 				System.out.println();
 				
-			 //r: 달성된 모든 목록을 지운다.
+			 //r: 달성된 모든 목록을 지우기
 			}else if(cmd.equals("r")) {
 				try {
 					dao.delete();
@@ -95,13 +96,21 @@ public class App {
 				}
 				System.out.println();
 				
-			// u: 정보를 업데이트한다. True False (Exception 1)??
+			// u: 이룬 일을 '달성'으로 체크하기
 			}else if(cmd.equals("u")) {
+				// 1. 체크할 리스트 넘버를 받는다.
 				System.out.println("Opt done.");
 				System.out.println("Inpute the order: ");
 				String num = sc.next();
-			
-				// 정보를 바꿈.
+				// 리스트 넘버를 숫자로 안 쓴 경우
+				try {
+					Integer.parseInt(num);
+				}catch(Exception e) {
+					System.out.println("Type only numbers.\n");
+					continue;
+				}
+				
+				// 2. '달성'으로 체크한다.
 				try {
 					dao.update(num);
 				} catch (Exception e1) {
@@ -109,21 +118,32 @@ public class App {
 				}
 				System.out.println();
 				
-			// s: 정보를 불러낸다.	(Exception 완료)
+			// s: 리스트 확인
 			}else if(cmd.equals("s")) {
+				// 1. 보여줄 리스트 넘버를 받는다.
 				System.out.println("Input the order: ");
 				String num = sc.next();
+				// 리스트 넘버를 숫자로 안 쓴 경우
+				try {
+					Integer.parseInt(num);
+				}catch(Exception e) {
+					System.out.println("Type only numbers.\n");
+					continue;
+				}
 				
+				// 2. 해당 리스트의 정보를 가져온다.
 				TodoVO o = null;
 				try {
 					o = dao.select(num);
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
+				
+				// 3. 해당 리스트를 보여준다.
 				System.out.println(o);
 				System.out.println();
 				
-			// a: DB에 있는 모든 정보를 불러낸다. (Exception 완료)
+			// a: DB에 있는 모든 정보를 불러낸다.
 			}else if(cmd.equals("a")) {
 				ArrayList<TodoVO> a = new ArrayList<TodoVO>();
 				try {
@@ -139,6 +159,7 @@ public class App {
 			
 			// f: 선택한 완료유무에 대한 모든 목록을 보여준다.
 			}else if(cmd.equals("f")) {
+				// 1. 보고 싶은 리스트의 달성유무를 받는다.
 				System.out.println("Done or Ongoing lists(true/false): ");
 				String check = sc.next();
 				
@@ -151,20 +172,22 @@ public class App {
 				boolean done = Boolean.parseBoolean(check);
 				
 				ArrayList<TodoVO> a = new ArrayList<TodoVO>();
-				// 정보를 보냄.
+				
+				// 2. 해당 달성유무의 목록들을 찾는다.
 				try {
 					a = search.search(done);
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
-				// 정보의 리스트를 보여준다.
+				
+				// 3. 찾은 목록들을 보여준다.
 				for (TodoVO o : a) {
 					System.out.println(o);
 				}
 				System.out.println();
 				
 			}else {
-				// 메뉴 외의 input이 들어왔을 때
+				// 메뉴 외의 input이 들어온 경우
 				System.out.println("Select a menu.\n");
 				continue;
 			}
