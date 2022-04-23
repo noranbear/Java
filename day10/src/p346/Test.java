@@ -1,6 +1,3 @@
-/**
- * 
- */
 package p346;
 
 import java.util.ArrayList;
@@ -16,8 +13,12 @@ import java.util.Iterator;
 public class Test {
 
 	public static void main(String[] args) {
-		// Map - key, value를 저장하는 공간. ArrayList key- value, value, value ...
+		// Map - key, value를 저장하는 공간. 
+		// ArrayList key- value, value, value ...
 		// Map - (key,value)(key,value)(key,value)
+		
+		
+		// HashMap의 선언
 		HashMap<String, CustomerVO> map = new HashMap<String, CustomerVO>();
 		
 		// 데이터 넣기 - insert
@@ -55,13 +56,8 @@ public class Test {
 			list.add(cust);
 		}
 		
-		for (CustomerVO cu : list) {
+		for (CustomerVO cu : list) {	// 화면에 보여주기
 			System.out.println(cu);
-		}
-		
-		
-		
-		
+		}	
 	}
-
 }
