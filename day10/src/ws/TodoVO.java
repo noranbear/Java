@@ -1,10 +1,7 @@
-/**
- * 
- */
 package ws;
 
 /**
- *
+ * TodoList에 필요한 정보를 담을 매개체 클래스
  * @author noranbear (norandoly@gmail.com)
  * @since 2022. 4. 20. 오후 4:48:26
  */
@@ -14,6 +11,7 @@ public class TodoVO {
 	private String what;
 	private boolean done;
 	
+	// Constructors
 	public TodoVO() {
 	}
 
@@ -24,6 +22,7 @@ public class TodoVO {
 		this.done = false;
 	}
 
+	// Getters and Setters
 	/**
 	 * @return the num
 	 */
@@ -80,15 +79,11 @@ public class TodoVO {
 		this.done = done;
 	}
 
-	
+	// toString()
 	@Override
 	public String toString() {
 		return "TodoVO [num=" + num + ", when=" + when + ", what=" + what + ", "
 				+ "done=" + done + "]";
 	}
-	
-	
-	
-	
 	
 }
