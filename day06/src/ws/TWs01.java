@@ -1,15 +1,13 @@
-/**
- * 
- */
 package ws;
 
 import java.util.Arrays;
 import java.util.Random;
 
 /**
- *
+ * 최대값을 찾는 문제 풀이
  * @author noranbear (norandoly@gmail.com)
  * @since 2022. 4. 14. 오후 12:36:13
+ * @version 1.0
  */
 public class TWs01 {
 
