@@ -152,7 +152,7 @@
 
 
 
-### [**Interface Practice**](./day10/src/README.md)
+### [**Interface Practice**](./day10/src)
 
 
 
