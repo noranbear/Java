@@ -15,9 +15,8 @@ public class App {
 
 	public static void main(String[] args) {
 		System.out.println("Start...");
-		DAO dao = new OracleDAO();	// interface -> DAO class 연결/ Spring에서는 이거 없이도
-									// 퍼즐처럼 뺏다꼈다
-//		DAO dao = new MariadbDAO();	// Mariadb에 연동
+		DAO dao = new OracleDAO();
+		
 		Scanner sc = new Scanner(System.in);
 		
 		while(true) {
