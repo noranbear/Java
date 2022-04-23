@@ -1,15 +1,14 @@
-/**
- * 
- */
+
 package ws;
 
 import java.util.Arrays;
 import java.util.Random;
 
 /**
- *
+ * 1~9까지의 램덤한 수를 배열에 중복되지 않게 넣고 그 중 안 들어간 수의 합을 구한다.
  * @author noranbear (norandoly@gmail.com)
  * @since 2022. 4. 14. 오전 11:37:59
+ * @version 1.0
  */
 public class TWs02 {
 
@@ -37,7 +36,6 @@ public class TWs02 {
 	
 		for (int i = 0; i < ar.length; i++) {
 			sum -= ar[i];
-			// sum = sum - ar[i]
 		}
 		System.out.printf("\n합: %d", sum);
 		
