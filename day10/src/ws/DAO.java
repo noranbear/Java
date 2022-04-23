@@ -27,7 +27,7 @@ public interface DAO {
 	
 	public void insert(TodoVO c);		
 	public void delete(String id);
-	public void update(TodoVO c);
+	public void update(String id);
 	public TodoVO select(String id);
 	public ArrayList<TodoVO> select();
 	
