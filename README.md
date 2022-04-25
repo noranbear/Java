@@ -22,32 +22,42 @@
 
 8장. [인터페이스 (Interface)](./day10) - p 344
 
+12장. [멀티스레드 (Multi-thread)](./day13) - p 576
+
+
+
+Java 언어의 특징
+
+- Exception
+- oop
+- generic 
+- collection API
+- Multi thread
+
 
 
 ## 날짜
 
 - [Day01](./day01) - 2022-04-04
-
 - [Day02](./day02) - 2022-04-05
-
 - [Day03](./day03) - 2022-04-06
-
 - [Day04](./day04) - 2022-04-11
-
 - [Day05](./day05) - 2022-04-12
-
 - [Day09](./day09) - 2022-04-19
 
   - Abstract class
-
 - [Day10](./day10) - 2022-04-20
 
   - 데이터 처리 원리
-
   - Interface
   - ArrayList()
   - HashMap
   - WS: [TodoList ver.1](./day10/src/ws)
+- [DAY13](./day13) - 2022-04-25
+  - Multi-thread
+  - JDBC (Java Database Connectivity)
+  - CURD
+
 
 
 
