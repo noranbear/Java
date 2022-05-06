@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
 import dao.BookDao;
 import frame.Dao;
@@ -23,7 +24,7 @@ import vo.BookVo;
  * App에서 쓸 UI 설계
  * @author noranbear (norandoly@gmail.com)
  * @since 2022. 4. 27. 오전 10:03:50
- * @version 1.0
+ * @version 2.0
  */
 public class UI {
 	
@@ -47,7 +48,7 @@ public class UI {
 	Button b1, b2;
 	Button b3, b4;
 	
-	List list; //list2;		// awt에 있는 list
+	List list;
 	
 	
 	// Constructor
@@ -69,6 +70,8 @@ public class UI {
 		b3 = new Button("대여");
 		b4 = new Button("반납");
 		
+		main = new Panel();			// main panel
+		
 		pe1 = new Panel();			// edge panels
 		pe2 = new Panel();
 		pe3 = new Panel();
@@ -76,21 +79,18 @@ public class UI {
 		pc = new Panel();			// center panel
 		
 		pt = new Panel();			// top panel on center panel
-		pt1 = new Panel();			// top panel on center panel
-		pt2 = new Panel();
-		pt3 = new Panel();
+		pt1 = new Panel();			// top panels on the top panel
+		pt2 = new Panel();			
+		pt3 = new Panel();			
 		
-		pm = new Panel();
-		pb = new Panel();
-		pb2 = new Panel();
-		
-		main = new Panel();
+		pm = new Panel();			// middle panel on the center panel
+		pb = new Panel();			// bottom panels on the center panel
+		pb2 = new Panel();			
 		
 		t1 = new TextField();
 		t2 = new TextField();
 		mainT = new TextField();
 		list = new List();
-//		list2 = new List();
 		
 	}
 	
@@ -99,7 +99,7 @@ public class UI {
 	 */
 	public void make() {
 		
-		// Title
+		// Title: "Search By Book ID"
 		title = new Label("Search By Book ID", Label.CENTER);
 		title.setBackground(Color.orange);
 		f.add(title, BorderLayout.NORTH);
@@ -110,12 +110,11 @@ public class UI {
 		pe3.setBackground(Color.LIGHT_GRAY);
 
 		pt.setBackground(Color.getHSBColor(10, 50, 100));	// top field -> yellow
-		pb2.setBackground(Color.getHSBColor(10, 50, 100));
+		pb2.setBackground(Color.getHSBColor(10, 50, 100));  // bottom right field -> yellow
 
-		
-		// center panel을 가로로 3등분
-		pc.setLayout(new GridLayout(3, 1));
-		pt.setLayout(new GridLayout(3, 1));
+		// Layout 만들기
+		pc.setLayout(new GridLayout(3, 1));		// center panel을 가로로 3등분
+		pt.setLayout(new GridLayout(3, 1));		// top panel을 가로로 3등분
 		
 		// main에 edge 만들기
 		main.setLayout(new BorderLayout());
@@ -124,14 +123,15 @@ public class UI {
 		main.add(pe3,"West");
 		main.add(mainT,"South");
 		
-		// main 가운데에다 패널 넣기
+		// main 가운데에다 center 패널 넣기
 		main.add(pc,"Center");
+		
+		// On center panel
 		// Top
 		pc.add(pt);
 		pt.add(pt1);	
 		pt.add(pt2);
-		
-		// 채팅창과 버튼
+		// 검색창과 버튼
 		pt2.setLayout(new BorderLayout());
 		pt2.add(b1,"East");
 		pt2.add(t1);
@@ -139,20 +139,18 @@ public class UI {
 		// Middle
 		pc.add(pm);
 		pm.setLayout(new BorderLayout());
+		// 리스트와 버튼
 		pm.add(b2, "East");
 		pm.add(list);
 		
 		// Bottom
 		pc.add(pb);
 		pb.setLayout(new GridLayout(1, 2));
-//		pb.add(list2);
+		// 검색창과 버튼
 		pb.add(t2);
-		
-		// 버튼
 		pb.add(pb2);
 		pb2.add(b3);
 		pb2.add(b4);
-		
 	
 		// main을 frame에 붙이기
 		f.add(main,"Center");
@@ -161,15 +159,15 @@ public class UI {
 		f.setSize(500, 400);
 		f.setVisible(true);
 		
-		
-		
 	}
 	
 	public void addEvent() {
-		
+		/**
+		 * Frame
+		 */
 		f.addWindowListener(new WindowAdapter() {
 			/**
-			 * frame 종료
+			 * x 누르면 종료
 			 */
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -177,12 +175,14 @@ public class UI {
 			}
 			
 		});
-		
 		/**
-		 * Enter button을 누르면 select 
+		 * Enter button
 		 */
 		b1.addActionListener(new ActionListener() {
-			
+			/**
+			 * Book ID를 t1에 쓰고 버튼을 누르면 해당 책이 검색된다.
+			 * selectOne 
+			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// 정보입력
@@ -190,8 +190,11 @@ public class UI {
 					list.removeAll();
 					int id = Integer.parseInt(t1.getText());
 					t1.setText("");
+					
 					BookVo b = null;
 					b = dao.select(id);
+					
+					// mainT와 list 메세지 세팅
 					String ss;
 					if(b.getStatus() == 0) {
 						ss = "대여중";
@@ -202,25 +205,32 @@ public class UI {
 					String s = b.getId()+" / "+b.getTitle()+" / "+b.getAuthor()+" / "+ss;
 					list.add(s);
 					
-				} catch (Exception e1) {
-					
-					e1.printStackTrace();
+				}catch (SQLException e2) {
+					mainT.setText(e2.getMessage());
+				// IF: 정수(id 타입)가 아닌 값이 들어온 경우
+				}catch (NumberFormatException e3) {
+					mainT.setText("다시 입력하십시오.");
+					t1.setText("");
 				}
 		
 			}
 		});
-		
 		/**
-		 * All button을 누르면 selectAll
+		 * All button
 		 */
 		b2.addActionListener(new ActionListener() {
-			
+			/**
+			 * 모든 책들의 정보를 보여준다
+			 * selectAll
+			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					mainT.setText("");
 					list.removeAll();
 					blist = dao.select();
+					
+					// list 메세지 세팅
 					for (BookVo bl : blist) {
 						String ss;
 						if(bl.getStatus() == 0) {
@@ -232,18 +242,19 @@ public class UI {
 						list.add(s);
 					}
 				} catch (Exception e1) {
-					
-					e1.printStackTrace();
+					mainT.setText(e1.getMessage());
 				}
 				
 			}
 		});
-		
 		/**
-		 * 대여 update0
+		 * 대여 버튼
 		 */
 		b3.addActionListener(new ActionListener() {
-		
+			/**
+			 * 선택된 책을 대여한다.
+			 * update0
+			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -252,22 +263,29 @@ public class UI {
 					dao.update0(id);
 					BookVo b = null;
 					b = dao.select(id);
-					mainT.setText("'" + b.getTitle() + "'을/를 대여하셨습니다.");
-					
-				} catch (Exception e1) {
-					
-					e1.printStackTrace();
+					// IF: 이미 책이 대여되어 있는 경우
+					if(b.getStatus() == '0') {
+						mainT.setText("'" + b.getTitle() + "'은/는 현재 대여불가합니다.");
+					}else {
+						mainT.setText("'" + b.getTitle() + "'을/를 대여하셨습니다.");
+					}
+				} catch (SQLException e1) {
+					mainT.setText(e1.getMessage());
+				// IF: 정수(id 타입)가 아닌 값이 들어온 경우
+				}catch (NumberFormatException e2) {
+					mainT.setText("다시 입력하십시오.");
+					t2.setText("");
 				}
-				
 			}
-		
 		});
-		
 		/**
-		 * 반납 update1
+		 * 반납 버튼
 		 */
 		b4.addActionListener(new ActionListener() {
-		
+			/**
+			 * 선택된 책을 반납한다.
+			 * update1
+			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -276,17 +294,22 @@ public class UI {
 					dao.update1(id);
 					BookVo b = null;
 					b = dao.select(id);
-					mainT.setText("'" + b.getTitle() + "'를 반납하셨습니다.");
+					// IF: 이미 책이 반납되어 있는 경우
+					if(b.getStatus() == '1') {
+						mainT.setText("'" + b.getTitle() + "'은/는 이미 반납되어 있습니다.");
+					}else {
+						mainT.setText("'" + b.getTitle() + "'를 반납하셨습니다.");
+					}
 					
-				} catch (Exception e1) {
-					
-					e1.printStackTrace();
+				}catch (SQLException e1) {
+					mainT.setText(e1.getMessage());
+				// IF: 정수(id 타입)가 아닌 값이 들어온 경우
+				}catch (NumberFormatException e2) {
+					mainT.setText("다시 입력하십시오.");
+					t2.setText("");
 				}
-				
 			}
-		
 		});
 		
-
 	}
 }
