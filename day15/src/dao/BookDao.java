@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +12,16 @@ import frame.Sql;
 import vo.BookVo;
 
 /**
- * 
+ * librarydb에서 정보를 사용할 때의 CRUD
  * @author noranbear (norandoly@gmail.com)
  * @since 2022. 4. 27. 오후 1:32:33
- * @version 1.0
+ * @version 2.0
  */
 public class BookDao extends Dao<Integer, BookVo> {
 
+	/**
+	 * librarydb에 해당 책정보를 집어넣는다.
+	 */
 	@Override
 	public void insert(BookVo val) throws Exception {
 		// 1. Connection
@@ -42,7 +46,9 @@ public class BookDao extends Dao<Integer, BookVo> {
 			close(con);
 		}
 	}
-
+	/**
+	 * librarydb에서 해당 책의 정보를 지운다.
+	 */
 	@Override
 	public void delete(Integer key) throws Exception {
 		// 1. Connection
@@ -65,12 +71,11 @@ public class BookDao extends Dao<Integer, BookVo> {
 			close(con);
 		}
 	}
-
 	/**
 	 * 대여
 	 */
 	@Override
-	public void update0(Integer key) throws Exception {
+	public void update0(Integer key) throws SQLException {
 		// 1. Connection
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -85,19 +90,20 @@ public class BookDao extends Dao<Integer, BookVo> {
 			
 			ps.executeUpdate();
 			
-		}catch(Exception e) {
-			throw e;
+		// UI에서 NumberFormatException에 대한 메세지를 따로 주기 위해
+		// Exception에서 SQLException으로 바꿈.
+		}catch(SQLException e) {
+			throw new SQLException("존재하지 않는 책입니다.");
 		}finally {
 			close(ps);
 			close(con);
 		}
 	}
-
 	/**
 	 * 반납
 	 */
 	@Override
-	public void update1(Integer key) throws Exception {
+	public void update1(Integer key) throws SQLException {
 		// 1. Connection
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -112,16 +118,20 @@ public class BookDao extends Dao<Integer, BookVo> {
 			
 			ps.executeUpdate();
 			
-		}catch(Exception e) {
-			throw e;
+		// UI에서 NumberFormatException에 대한 메세지를 따로 주기 위해
+		// Exception에서 SQLException으로 바꿈.
+		}catch(SQLException e) {
+			throw new SQLException("존재하지 않는 책입니다.");
 		}finally {
 			close(ps);
 			close(con);
 		}
 	}
-	
+	/**
+	 * librarydb에 있는 책 중 선택된 책의 정보를 가져온다.
+	 */
 	@Override
-	public BookVo select(Integer key) throws Exception {
+	public BookVo select(Integer key) throws SQLException {
 		BookVo b = null;
 		// 1. Connection
 		Connection con = null;
@@ -146,8 +156,11 @@ public class BookDao extends Dao<Integer, BookVo> {
 			
 			b = new BookVo(id,title,author,isbn,status);
 		
-		}catch(Exception e) {
-			throw e;
+		// UI에서 NumberFormatException에 대한 메세지를 따로 주기 위해
+		// Exception에서 SQLException으로 바꿈.
+		}catch(SQLException e){
+			throw new SQLException("존재하지 않는 책입니다.");
+			
 		}finally {
 			close(con);
 			close(ps);
@@ -155,7 +168,9 @@ public class BookDao extends Dao<Integer, BookVo> {
 		}
 		return b;
 	}
-
+	/**
+	 * libraraydb에 있는 책의 모든 정보를 가져온다.
+	 */
 	@Override
 	public List<BookVo> select() throws Exception {
 		List<BookVo> list = new ArrayList<BookVo>();
@@ -184,7 +199,7 @@ public class BookDao extends Dao<Integer, BookVo> {
 			}
 		
 		}catch(Exception e) {
-			throw e;
+			throw new Exception("책 목록을 불러올 수 없습니다.");
 		}finally {
 			close(con);
 			close(ps);
